@@ -1,2 +1,3 @@
 # SpaceShooter
-My Space Shooter
+This is my Space Shooter
+By Jay.
