@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Space Shooter Launcher</title>
+  <style>
+    body {
+      background: radial-gradient(circle at center, #001011, #000000);
+      color: #00ff88;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding-top: 80px;
+    }
+    h1 {
+      font-size: 36px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    .login-box, .loading-box {
+      display: none;
+      margin-top: 30px;
+    }
+    .active {
+      display: block;
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #00aa88;
+      background: #002222;
+      color: #00ffcc;
+      width: 250px;
+    }
+    .button {
+      background-color: #008844;
+      border: none;
+      color: white;
+      padding: 12px 28px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 15px;
+    }
+    .button:hover {
+      background-color: #00bb66;
+    }
+    .status {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #55ffaa;
+      font-family: monospace;
+      min-height: 24px;
+    }
+    .footer {
+      position: fixed;
+      bottom: 12px;
+      width: 100%;
+      font-size: 12px;
+      color: #448844;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 Space Shooter</h1>
+  <h2 id="subheading">Log in to launch the game</h2>
+
+  <!-- Login Form -->
+  <div class="login-box active" id="loginBox">
+    <input type="text" id="username" placeholder="Username"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button class="button" onclick="validateLogin()">Log In</button>
+    <div class="status" id="loginStatus"></div>
+  </div>
+
+  <!-- Fake Loading -->
+  <div class="loading-box" id="loadingBox">
+    <button class="button" disabled>Starting...</button>
+    <div class="status" id="status">Preparing game...</div>
+  </div>
+
+  <div class="footer">© 2025 AmazingJay9</div>
+
+  <script>
+    const loginBox = document.getElementById("loginBox");
+    const loadingBox = document.getElementById("loadingBox");
+    const statusEl = document.getElementById("status");
+    const loginStatus = document.getElementById("loginStatus");
+    const subheading = document.getElementById("subheading");
+
+    const validUsername = "TestDummy1";
+    const validPassword = "Test";
+
+    const loadingMessages = [
+      "Authenticating...",
+      "Connecting to game servers...",
+      "Loading assets...",
+      "Configuring shaders...",
+      "Initializing space engine...",
+      "Final checks..."
+    ];
+
+    function validateLogin() {
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value.trim();
+
+      if (user === "" || pass === "") {
+        loginStatus.textContent = "⚠️ Please enter a username and password.";
+        return;
+      }
+
+      loginStatus.textContent = "🔒 Verifying credentials...";
+      setTimeout(() => {
+        if (user === validUsername && pass === validPassword) {
+          loginStatus.textContent = "";
+          proceedToLoading();
+        } else {
+          loginStatus.textContent = "❌ Invalid username or password.";
+        }
+      }, 1500);
+    }
+
+    function proceedToLoading() {
+      loginBox.classList.remove("active");
+      loadingBox.classList.add("active");
+      subheading.textContent = "Launching Space Shooter...";
+
+      let i = 0;
+      statusEl.textContent = loadingMessages[i];
+      const interval = setInterval(() => {
+        i++;
+        if (i < loadingMessages.length) {
+          statusEl.textContent = loadingMessages[i];
+        } else {
+          clearInterval(interval);
+          statusEl.textContent = "Starting...";
+          setTimeout(() => {
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+          }, 1200);
+        }
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
